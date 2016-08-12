@@ -1,0 +1,21 @@
+{
+  "name": "scrap-all-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "Mauricio nunes dos reis",
+  "license": "MIT",
+  "dependencies": {
+    "mysql": "^2.11.1",
+    "nightmare": "^2.6.1",
+    "vo": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.0"
+  }
+}
