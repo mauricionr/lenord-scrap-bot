@@ -11,25 +11,25 @@ vo(run)(function(err, result) {
 function *run(){
     try {
         let mysql = require("mysql");
-        let nightmare = Nightmare({show:true});
-        let currentSelector = '.product-options-bottom > div + div + div > .regular-price > .price > .v'
-        let requestURL = 'http://www.socourus.com.br/mochila-hang-loose-mosaico-hl1112'
+        let nightmare = Nightmare();
+        let currentSelector = '.product-options-bottom > div + div + div > .regular-price > .price > .v';
+        let requestURL = 'http://www.socourus.com.br/mochila-hang-loose-mosaico-hl1112';
+        
         yield nightmare
             .goto(requestURL)
-            .wait()
-            .wait(currentSelector)
-            .wait(1000)
+            .wait(currentSelector);
 
         let price = yield nightmare
             .evaluate(function(selector){
-                return document.querySelector(selector).innerHTML
-        }, currentSelector)
+                return document.querySelector(selector).innerHTML;
+        }, currentSelector);
 
-        yield nightmare.end()
+        yield nightmare
             .end();
 
         console.log("It's working : ", price);
+        console.log(config);
     } catch (error) {
-        console.log(error)   
+        console.log(error);
     }
 }
