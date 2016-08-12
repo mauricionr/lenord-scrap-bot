@@ -9,11 +9,27 @@ vo(run)(function(err, result) {
 });
 
 function *run(){
-    let nightmare = Nightmare();
+    try {
+        let mysql = require("mysql");
+        let nightmare = Nightmare({show:true});
+        let currentSelector = '.product-options-bottom > div + div + div > .regular-price > .price > .v'
+        let requestURL = 'http://www.socourus.com.br/mochila-hang-loose-mosaico-hl1112'
+        yield nightmare
+            .goto(requestURL)
+            .wait()
+            .wait(currentSelector)
+            .wait(1000)
 
-    yield nightmare
-        .goto('https://www.instagram.com/accounts/login/')
-        .end();
+        let price = yield nightmare
+            .evaluate(function(selector){
+                return document.querySelector(selector).innerHTML
+        }, currentSelector)
 
-    console.log("It's working");
+        yield nightmare.end()
+            .end();
+
+        console.log("It's working : ", price);
+    } catch (error) {
+        console.log(error)   
+    }
 }
